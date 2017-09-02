@@ -1,0 +1,703 @@
+{
+	"variables": [],
+	"info": {
+		"name": "metalogon",
+		"_postman_id": "682c0f58-9147-84ed-757b-1ead368676c4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "canons",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/canon",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.id) {",
+									"    postman.setEnvironmentVariable(\"canonId\", res.data.id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/canon",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/canon/{{canonId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update one",
+					"request": {
+						"url": "{{root}}/canon/{{canonId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success) {",
+									"    postman.clearEnvironmentVariable(\"canonId\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/canon/{{canonId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/category",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.id) {",
+									"    postman.setEnvironmentVariable(\"categoryId\", res.data.id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/category",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/category/{{categoryId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update one",
+					"request": {
+						"url": "{{root}}/category/{{categoryId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success) {",
+									"    postman.clearEnvironmentVariable(\"categoryId\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/category/{{categoryId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "genres",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/genre",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.id) {",
+									"    postman.setEnvironmentVariable(\"genreId\", res.data.id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/genre",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/genre/{{genreId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update one",
+					"request": {
+						"url": "{{root}}/genre/{{genreId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success) {",
+									"    postman.clearEnvironmentVariable(\"genreId\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/genre/{{genreId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "classes",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/class",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.id) {",
+									"    postman.setEnvironmentVariable(\"classId\", res.data.id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/class",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/class/{{classId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update one",
+					"request": {
+						"url": "{{root}}/class/{{classId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success) {",
+									"    postman.clearEnvironmentVariable(\"classId\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/class/{{classId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "videos",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/video",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.id) {",
+									"    postman.setEnvironmentVariable(\"videoId\", res.data.id);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/video",
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/video/{{videoId}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update one",
+					"request": {
+						"url": "{{root}}/video/{{videoId}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Delivery\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success) {",
+									"    postman.clearEnvironmentVariable(\"videoId\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/video/{{videoId}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "jwvideos",
+			"description": "",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"url": "{{root}}/jwvideo/{{jw_video_Key}}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var res = JSON.parse(responseBody);",
+									"",
+									"if (responseCode.code === 200 && res.success && res.data.media.key) {",
+									"    postman.setEnvironmentVariable(\"jw_video_Key\", res.data.media.key);",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{root}}/jwvideo",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"TEST\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"url": "{{root}}/jwvideo",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"url": "{{root}}/jwvideo/{{jw_video_Key}}",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
