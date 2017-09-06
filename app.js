@@ -67,7 +67,8 @@ controllers.tree = require("./controllers/tree")(models);
  * JW Player
  */
 
-controllers.jwvideo = require("./jwplayer/controller")(jwPlatform);
+controllers.jwvideo = require("./controllers/jwvideo")(jwPlatform);
+controllers.jwconversion = require("./controllers/jwconversion")(jwPlatform);
 
 /**
  * Express

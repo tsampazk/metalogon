@@ -11,6 +11,7 @@ module.exports = {
         thumb: Joi.string().uri(),
         duration: Joi.number().integer(),
         jwVideoId: Joi.string().max(150),
+        createdAt: Joi.date().default(Date.now, "Creation date"),
         sources: Joi.array().items(
             Joi.object().options({ stripUnknown: true }).keys({
                 width: Joi.number().integer(),
