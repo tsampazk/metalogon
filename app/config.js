@@ -7,12 +7,12 @@ module.exports = {
     },
     
     mongodb: {
-        host: ""
+        host: "mongodb://192.168.1.114:27017/metalogon"
     },
     
     jwPlatform: {
-        key: "",
-        secret: ""
+        key: "1jGlF6St",
+        secret: "TFGhnmFNM2vTgCe17I4lQ6N8"
     }
 
 };

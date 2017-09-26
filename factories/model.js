@@ -10,10 +10,10 @@ module.exports = function(db, schema) {
             
         },
         
-        getAll: function(done) {
+        getAll: function(criteria, done) {
             
-            model.find({}).exec(done);
-
+            model.find(criteria).exec(done);
+            
         },
         
         create: function(data, done) {

@@ -10,7 +10,7 @@ module.exports = function(model) {
         
         getAll: function(req, res) {
     
-            model.getAll(list(req, res));
+            model.getAll(req.query, list(req, res));
 
         },
         
