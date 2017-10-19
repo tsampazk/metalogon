@@ -7,8 +7,7 @@ module.exports = {
     },
     
     mongodb: {
-        //host: "mongodb://192.168.1.114:27017/metalogon"
-        host: "mongodb://approle:gr3%40t!@ds121014.mlab.com:21014?authSource=heroku_mr042xd2"
+        host: process.env.MONGODB_URI
     },
     
     jwPlatform: {
