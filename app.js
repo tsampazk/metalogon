@@ -7,7 +7,7 @@ let bodyParser = require("body-parser");
 let cors = require("cors");
 let express = require("express");
 let http = require("http");
-global.Joi = require("Joi");
+global.Joi = require("joi");
 let jwPlatform = require("jwplatform-api");
 global._ = require("lodash");
 require("./dependencies/lodash-additional")(_); // TODO: npm package?
