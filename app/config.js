@@ -7,7 +7,7 @@ module.exports = {
     },
     
     mongodb: {
-        host: 'localhost'
+        host: process.env.MONGODB_URI
     },
     
     jwPlatform: {
