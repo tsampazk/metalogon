@@ -1,6 +1,6 @@
 module.exports = {
     
-    name: "category",
+    name: "categories",
     
     create: Joi.object().options({ stripUnknown: true }).keys({
         id: Joi.string().guid().default(() => uuid.v4(), "v4"),

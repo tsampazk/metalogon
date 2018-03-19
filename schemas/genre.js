@@ -1,6 +1,6 @@
 module.exports = {
     
-    name: "genre",
+    name: "genres",
     
     create: Joi.object().options({ stripUnknown: true }).keys({
         id: Joi.string().guid().default(() => uuid.v4(), "v4"),

@@ -18,8 +18,8 @@ module.exports = function(models) {
     
         let tree = {};
     
-        _.forEach(canons, (c) => tree[c.name] = _.merge(c.toObject(), { categories: [] }));
-        _.forEach(categories, (c) => tree[c.canon].categories.push(c.toObject()));
+        _.forEach(canons, (c) => tree[c.name] = _.merge(c, { categories: [] }));
+        _.forEach(categories, (c) => tree[c.canon].categories.push(c));
         
         done(null, tree);
     

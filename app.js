@@ -3,16 +3,16 @@
  */
 
 global.async = require("async");
-let bodyParser = require("body-parser");
-let cors = require("cors");
-let express = require("express");
-let http = require("http");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const crypto = require("crypto");
+const express = require("express");
+const http = require("http");
 global.Joi = require("joi");
-let jwPlatform = require("jwplatform-api");
+const jwPlatform = require("jwplatform-api");
 global._ = require("lodash");
 require("./dependencies/lodash-additional")(_); // TODO: npm package?
-let mongoose = require('mongoose');
-global.joigoose = require("joigoose")(mongoose);
+const mongo = require("mongodb");
 global.uuid = require("uuid");
 
 /**
@@ -22,46 +22,85 @@ global.uuid = require("uuid");
 global.config = require("./app/config");
 
 /**
- * Store
+ * Lib
  */
 
-let db = mongoose.createConnection(config.mongodb.host);
+const cryptography = require("./lib/cryptography")(crypto, uuid);
+const store = require("./lib/store")(mongo);
 
 /**
  * MVC
  */
 
-let schemas = {};
-let models = {};
-let controllers = {};
+const schemas = {};
+const models = {};
+const controllers = {};
+const invitations = {};
+
+// Annotation
+schemas.annotation = require("./schemas/annotation");
+models.annotation = require("./factories/model")(store, schemas.annotation);
+controllers.annotation = require("./factories/controller")(models.annotation);
+
+// Assignments
+schemas.assignment = require("./schemas/assignment");
+models.assignment = require("./factories/model")(store, schemas.assignment);
+controllers.assignment = require("./factories/controller")(models.assignment);
 
 // Canons
 schemas.canon = require("./schemas/canon");
-models.canon = require("./factories/model")(db, schemas.canon);
+models.canon = require("./factories/model")(store, schemas.canon);
 controllers.canon = require("./factories/controller")(models.canon);
 
 // Categories
 schemas.category = require("./schemas/category");
-models.category = require("./factories/model")(db, schemas.category);
+models.category = require("./factories/model")(store, schemas.category);
 controllers.category = require("./factories/controller")(models.category);
-
-// Genres
-schemas.genre = require("./schemas/genre");
-models.genre = require("./factories/model")(db, schemas.genre);
-controllers.genre = require("./factories/controller")(models.genre);
 
 // Classes
 schemas.class = require("./schemas/class");
-models.class = require("./factories/model")(db, schemas.class);
+models.class = require("./factories/model")(store, schemas.class);
 controllers.class = require("./factories/controller")(models.class);
+
+// Collaborations
+schemas.collaboration = require("./schemas/collaboration");
+models.collaboration = require("./factories/model")(store, schemas.collaboration);
+controllers.collaboration = require("./factories/controller")(models.collaboration);
+
+// Enrollments
+schemas.enrollment = require("./schemas/enrollment");
+models.enrollment = require("./factories/model")(store, schemas.enrollment);
+controllers.enrollment = require("./factories/controller")(models.enrollment);
+
+// Genres
+schemas.genre = require("./schemas/genre");
+models.genre = require("./factories/model")(store, schemas.genre);
+controllers.genre = require("./factories/controller")(models.genre);
+
+// Users
+schemas.user = require("./schemas/user");
+models.user = require("./factories/model")(store, schemas.user);
+controllers.user = require("./controllers/user")(models.user, cryptography, invitations);
 
 // Videos
 schemas.video = require("./schemas/video");
-models.video = require("./factories/model")(db, schemas.video);
+models.video = require("./factories/model")(store, schemas.video);
 controllers.video = require("./factories/controller")(models.video);
 
 // Canons/categories tree
 controllers.tree = require("./controllers/tree")(models);
+
+// Login
+controllers.login = require("./controllers/login")(models.user, cryptography);
+
+// Invitations
+controllers.invitation = require("./controllers/invitation")(invitations);
+
+// Collaborators
+controllers.collaborator = require("./controllers/collaborator")(models.user, models.collaboration);
+
+// Collaborated videos
+controllers.collaborated = require("./controllers/collaborated")(models.video, models.collaboration);
 
 /**
  * JW Player
@@ -74,7 +113,7 @@ controllers.jwconversion = require("./controllers/jwconversion")(jwPlatform);
  * Express
  */
 
-let app = express();
+const app = express();
 
 // Middleware
 app.use(cors());                                            // Enable cross-origin requests
@@ -87,6 +126,12 @@ app.use(bodyParser.urlencoded({                             // Parses form reque
     extended: true
 }));
 
+// Context
+const context = require("./middleware/context")(models.user);
+app.use(context.initialize);
+app.use(context.authenticate);
+app.use(context.authorize);
+
 // Routing
 _.forEach(controllers, function(controller, key) {
     if (controller.get) { app.get(config.api.root + "/" + key + "/:id", controller.get); console.log("GET " + config.api.root + "/" + key + "/:id"); }
@@ -96,18 +141,27 @@ _.forEach(controllers, function(controller, key) {
     if (controller.delete) { app.delete(config.api.root + "/" + key + "/:id", controller.delete); console.log("DELETE " + config.api.root + "/" + key + "/:id"); }
 });
 
+// Errors
+app.use(context.handleErrors);
+
+
 /**
  * SERVER
  */
 
-let server = http.createServer();
+const server = http.createServer();
 
 server.on("request", app); // Mount express app
 
-server.listen(config.api.port, config.api.interface, function() {
-    
-    let address = server.address();
-    
-    console.log("API server is listening at http://" + address.address + ":" + address.port);
-    
+async.series([
+    (done) => store.connect(done),
+    (done) => server.listen(config.api.port, config.api.interface, done)
+], (err) => {
+    if (!err) {
+        let address = server.address();
+        console.log("API server is listening at http://" + address.address + ":" + address.port);
+    }
+    else {
+        console.log(err);
+    }
 });

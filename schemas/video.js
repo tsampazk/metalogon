@@ -1,9 +1,10 @@
 module.exports = {
     
-    name: "video",
+    name: "videos",
     
     create: Joi.object().options({ stripUnknown: true }).keys({
         id: Joi.string().guid().default(() => uuid.v4(), "v4"),
+        createdAt: Joi.date().default(Date.now, "Creation date"),
         title: Joi.string().empty("").max(500),
         class: Joi.string().max(500),
         classNumber: Joi.string().max(500),
@@ -16,7 +17,6 @@ module.exports = {
         duration: Joi.number().integer(),
         jwVideoId: Joi.string().max(150),
         presentedAt: Joi.date(),
-        createdAt: Joi.date().default(Date.now, "Creation date"),
         sources: Joi.array().items(
             Joi.object().options({ stripUnknown: true }).keys({
                 width: Joi.number().integer(),
@@ -24,19 +24,6 @@ module.exports = {
                 type: Joi.string().max(100),
                 label: Joi.string().max(100),
                 file: Joi.string().uri(),
-            })
-        ),
-        annotations: Joi.array().items(
-            Joi.object().options({ stripUnknown: true }).keys({
-                id: Joi.number().integer(),
-                label: Joi.string().max(100),
-                author: Joi.string().empty("").max(500),
-                category: Joi.string().max(500),
-                canon: Joi.string().max(500),
-                comment: Joi.string().empty("").max(500),
-                from: Joi.string().max(20),
-                to: Joi.string().max(20),
-                rating: Joi.number().integer(),
             })
         )
     }),
@@ -61,19 +48,6 @@ module.exports = {
                 type: Joi.string().max(100),
                 label: Joi.string().max(100),
                 file: Joi.string().uri(),
-            })
-        ),
-        annotations: Joi.array().items(
-            Joi.object().options({ stripUnknown: true }).keys({
-                id: Joi.number().integer(),
-                label: Joi.string().max(100),
-                author: Joi.string().empty("").max(500),
-                category: Joi.string().max(500),
-                canon: Joi.string().max(500),
-                comment: Joi.string().empty("").max(500),
-                from: Joi.string().max(20),
-                to: Joi.string().max(20),
-                rating: Joi.number().integer(),
             })
         )
     })
