@@ -158,10 +158,18 @@ async.series([
     (done) => server.listen(config.api.port, config.api.interface, done)
 ], (err) => {
     if (!err) {
+
+        //models.genre.getAll(null, (err, genres) => _.each(genres, (genre) => models.genre.create(genre, _=>{})));
+        models.genre.getAll(null, (err, genres) => console.log(genres));
+
+
         let address = server.address();
+
         console.log("API server is listening at http://" + address.address + ":" + address.port);
+
     }
     else {
         console.log(err);
     }
 });
+

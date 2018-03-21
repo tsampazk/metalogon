@@ -7,7 +7,6 @@ module.exports = {
     },
     
     store: {
-        //host: process.env.STORE_HOST,
         host: process.env.MONGODB_URI,
         db: process.env.STORE_DB
     },

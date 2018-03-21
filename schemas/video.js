@@ -17,6 +17,7 @@ module.exports = {
         duration: Joi.number().integer(),
         jwVideoId: Joi.string().max(150),
         presentedAt: Joi.date(),
+        assignmentId: Joi.string().guid(),
         sources: Joi.array().items(
             Joi.object().options({ stripUnknown: true }).keys({
                 width: Joi.number().integer(),
@@ -41,6 +42,7 @@ module.exports = {
         duration: Joi.number().integer(),
         jwVideoId: Joi.string().max(150),
         presentedAt: Joi.date(),
+        assignmentId: Joi.string().guid(),
         sources: Joi.array().items(
             Joi.object().options({ stripUnknown: true }).keys({
                 width: Joi.number().integer(),
