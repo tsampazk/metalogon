@@ -12,8 +12,8 @@ module.exports = {
     },
     
     jwPlatform: {
-        key: "1jGlF6St",
-        secret: "TFGhnmFNM2vTgCe17I4lQ6N8"
+        key: "42cgSrMI",
+        secret: "b2rWFGGh8b84Z8bclyCSROg2"
     },
 
     security: {
