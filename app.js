@@ -102,6 +102,12 @@ controllers.collaborator = require("./controllers/collaborator")(models.user, mo
 // Collaborated videos
 controllers.collaborated = require("./controllers/collaborated")(models.video, models.collaboration);
 
+// Enrolled users
+controllers.enrolleduser = require("./controllers/enrolleduser")(models.user, models.enrollment);
+
+// Enrolled classes
+controllers.enrolledclass = require("./controllers/enrolledclass")(models.class, models.enrollment);
+
 /**
  * JW Player
  */
