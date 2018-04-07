@@ -3,7 +3,7 @@ module.exports = {
     api: {
         root: "/rest",
         interface: "0.0.0.0",
-        port: process.env.PORT
+        port: 3002 //process.env.PORT
     },
     
     store: {

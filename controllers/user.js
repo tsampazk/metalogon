@@ -108,16 +108,16 @@ module.exports = function(User, cryptography, invitations) {
 
     function updateResult(req, res) {
 
-        return function(err, result) {
+        return function(err, commandResult) {
 
             if (err) {
                 res.status(500).json({ success: false, message: err.message, stack: err.stack });
             }
-            else if (result.ok !== 1) {
-                res.status(500).json({ success: false, data: result });
+            else if (commandResult.result.ok !== 1) {
+                res.status(500).json({ success: false, data: commandResult });
             }
-            else if (result.n === 0) {
-                res.status(404).json({ success: false, data: result });
+            else if (commandResult.result.n === 0) {
+                res.status(404).json({ success: false, data: commandResult });
             }
             else {
                 res.json({ success: true, data: result }).end();
