@@ -6,7 +6,7 @@ module.exports = {
         id: Joi.string().guid().default(() => uuid.v4(), "v4"),
         createdAt: Joi.date().default(Date.now, "Creation date"),
         videoId: Joi.string().guid(),
-        label: Joi.string().max(100),
+        label: Joi.string().max(200),
         author: Joi.string().empty("").max(500),
         category: Joi.string().max(500),
         canon: Joi.string().max(500),
@@ -17,7 +17,7 @@ module.exports = {
     }),
 
     update: Joi.object().options({ stripUnknown: true }).keys({
-        label: Joi.string().max(100),
+        label: Joi.string().max(200),
         author: Joi.string().empty("").max(500),
         category: Joi.string().max(500),
         canon: Joi.string().max(500),
