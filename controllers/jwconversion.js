@@ -22,7 +22,7 @@ module.exports = function(jwPlatform) {
         return function(err, result) {
     
             if (err) {
-                res.status(500).json({ success: false, message: err.message, stack: err.stack });
+                res.status(500).json({ success: false, message: err.message, stack: err.stack, data: err });
             }
             else {
                 res.json({ success: true, data: result });
