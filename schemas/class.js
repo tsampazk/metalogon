@@ -9,7 +9,8 @@ module.exports = {
         department: Joi.string().empty("").max(500),
         name: Joi.string().empty("").max(500),
         number: Joi.string().empty("").max(500),
-        semester: Joi.string().empty("").max(500)
+        semester: Joi.string().empty("").max(500),
+        catFilter: Joi.array()
     }),
     
     update: Joi.object().options({ stripUnknown: true }).keys({
@@ -18,7 +19,8 @@ module.exports = {
         department: Joi.string().empty("").max(500),
         name: Joi.string().empty("").max(500),
         number: Joi.string().empty("").max(500),
-        semester: Joi.string().empty("").max(500)
+        semester: Joi.string().empty("").max(500),
+        catFilter: Joi.array()
     })
     
 };

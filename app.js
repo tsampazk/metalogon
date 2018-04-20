@@ -108,12 +108,16 @@ controllers.enrolleduser = require("./controllers/enrolleduser")(models.user, mo
 // Enrolled classes
 controllers.enrolledclass = require("./controllers/enrolledclass")(models.class, models.enrollment);
 
+// View annotations
+controllers.viewannotation = require("./controllers/viewannotation")(models.annotation, models.category);
+
 /**
  * JW Player
  */
 
 controllers.jwvideo = require("./controllers/jwvideo")(jwPlatform);
 controllers.jwconversion = require("./controllers/jwconversion")(jwPlatform);
+controllers.jwthumbnail = require("./controllers/jwthumbnail")(jwPlatform);
 
 /**
  * Express

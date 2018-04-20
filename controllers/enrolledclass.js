@@ -7,7 +7,7 @@ module.exports = function(Class, Enrollment) {
             async.waterfall([
                 (done) => Enrollment.getAll(req.query, done),
                 (enrollments, done) => Class.getAll(_.map(enrollments, (item) => item.classId ), done)
-            ], list(req, res, [ "hash", "salt", "token" ]));
+            ], list(req, res));
 
         }
 
