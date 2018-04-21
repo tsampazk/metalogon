@@ -8,11 +8,11 @@ module.exports = function(jwPlatform) {
     return {
     
         get: function(req, res) {
-            api.post("v1/videos/conversions/show", { conversion_key: req.params.id }, null, result(req, res));
+            api.post("v1/videos/thumbnails/show", { video_key: req.params.id }, null, result(req, res));
         },
-    
-        getAll: function(req, res) {
-            api.post("v1/videos/conversions/list", { video_key: req.query.videoId }, null, result(req, res));
+
+        update: function(req, res) {
+            api.post("v1/videos/thumbnails/update", { video_key: req.params.id }, req.body, result(req, res));
         }
         
     };

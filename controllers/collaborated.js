@@ -7,7 +7,7 @@ module.exports = function(Video, Collaboration) {
             async.waterfall([
                 (done) => Collaboration.getAll(req.query, done),
                 (collaborations, done) => Video.getAll(_.map(collaborations, (item) => item.videoId ), done)
-            ], list(req, res, [ "hash", "salt", "token" ]));
+            ], list(req, res));
 
         }
 

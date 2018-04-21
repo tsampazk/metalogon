@@ -16,7 +16,7 @@ module.exports = function(jwPlatform) {
         },
     
         create: function(req, res) {
-            api.post("v1/videos/create", req.body, null, result(req, res));
+            api.post("v1/videos/create", null, req.body, result(req, res));
         },
     
         delete: function(req, res) {

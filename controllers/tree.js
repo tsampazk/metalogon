@@ -5,8 +5,8 @@ module.exports = function(models) {
         getAll: function(req, res) {
             
             async.waterfall([
-                (done) => models.canon.getAll(done),
-                (canons, done) => models.category.getAll((err, categories) => done(err, categories, canons)),
+                (done) => models.canon.getAll({}, done),
+                (canons, done) => models.category.getAll({}, (err, categories) => done(err, categories, canons)),
                 (categories, canons, done) => join(categories, canons, done)
             ], list(req, res));
             
@@ -19,7 +19,12 @@ module.exports = function(models) {
         let tree = {};
     
         _.forEach(canons, (c) => tree[c.name] = _.merge(c, { categories: [] }));
-        _.forEach(categories, (c) => tree[c.canon].categories.push(c));
+        _.forEach(categories, (c) => {
+            if (!c.parentId) {
+                c.subcategories = _.filter(categories, (o) => o.parentId === c.id);
+                tree[c.canon].categories.push(c)
+            }
+        });
         
         done(null, tree);
     

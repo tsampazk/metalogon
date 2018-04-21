@@ -7,13 +7,15 @@ module.exports = {
         classId: Joi.string().guid(),
         title: Joi.string().empty("").max(500),
         description: Joi.string().empty("").max(500),
-        genre: Joi.string().guid()
+        genre: Joi.string().guid(),
+        dueDate: Joi.date()
     }),
 
     update: Joi.object().options({ stripUnknown: true }).keys({
         title: Joi.string().empty("").max(500),
         description: Joi.string().empty("").max(500),
-        genre: Joi.string().guid()
+        genre: Joi.string().guid(),
+        dueDate: Joi.date()
     })
 
 };
